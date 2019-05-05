@@ -1,10 +1,11 @@
-// 5 5 // number of rows and columns
-// 1 2 // hoover starting position
-// 1 0 // dirt position 
-// 2 2 // dirt position  
-// 2 3 // dirt position 
+var fs = require('fs');
 
-// NNESEESWNWW
+// Process args from input.txt
+var dataArray = fs.readFileSync('input.txt', 'utf8').toString().split("\n");
+const boardDimensions = dataArray.slice(0, 1).toString().split(" ")
+const startPosition = dataArray.slice(1, 2).toString().split(" ")
+const dirtCoords = dataArray.slice(2, -1)
+const intructions = dataArray[dataArray.length -1].split("")
 
 class Game {
   constructor(numberOfRows, numberOfColumns) {
@@ -47,11 +48,9 @@ class Game {
     if(this.board[yAxis][xAxis] === 'Dirt') {
       this.dirtRemoved++
     }
-    this.board[this.hooverCoords.y][this.hooverCoords.x] = ''
+    this.board[this.hooverCoords.y][this.hooverCoords.x] = '' // ref prev coords 
     this.setHooverPosition(xAxis, yAxis)
   }
-
-
 
   makeMove(direction) {
     this.moves++
@@ -60,50 +59,40 @@ class Game {
       case 'N': {
         const yAxis = this.hooverCoords.y + 1
         const xAxis = this.hooverCoords.x
-        if(this.hooverCoords.y + 1 > this.rowsLength - 1) {
+        if(yAxis > this.rowsLength - 1) {
           console.log("Invalid Move") 
         } else {
-          if(this.board[this.hooverCoords.y + 1][this.hooverCoords.x] === 'Dirt') {
-            this.dirtRemoved++
-          }
-          this.board[this.hooverCoords.y][this.hooverCoords.x] = ''
-          this.setHooverPosition(this.hooverCoords.x, this.hooverCoords.y + 1)
+          this.moveHoover(xAxis, yAxis)
         }
         break;
       }
       case 'E': {
-        if(this.hooverCoords.x + 1 > this.columnsLength - 1) {
+        const yAxis = this.hooverCoords.y
+        const xAxis = this.hooverCoords.x + 1
+        if(xAxis > this.columnsLength - 1) {
           console.log("Invalid Move") 
         } else {
-          if(this.board[this.hooverCoords.y][this.hooverCoords.x + 1] === 'Dirt') {
-            this.dirtRemoved++
-          }
-          this.board[this.hooverCoords.y][this.hooverCoords.x] = ''
-          this.setHooverPosition(this.hooverCoords.x + 1, this.hooverCoords.y)
+          this.moveHoover(xAxis, yAxis)
         }
         break;
       }
       case 'S': {
-        if(this.hooverCoords.y - 1 < 0) {
+        const yAxis = this.hooverCoords.y - 1
+        const xAxis = this.hooverCoords.x 
+        if(yAxis < 0) {
           console.log("Invalid Move") 
         } else {
-          if(this.board[this.hooverCoords.y - 1][this.hooverCoords.x] === 'Dirt') {
-            this.dirtRemoved++
-          }
-          this.board[this.hooverCoords.y][this.hooverCoords.x] = ''
-          this.setHooverPosition(this.hooverCoords.x, this.hooverCoords.y - 1)
+          this.moveHoover(xAxis, yAxis)
         }
         break;
       }
       case 'W': {
-        if(this.hooverCoords.x - 1 < 0) {
+        const yAxis = this.hooverCoords.y 
+        const xAxis = this.hooverCoords.x - 1
+        if(xAxis < 0) {
           console.log("Invalid Move") 
         } else {
-          if(this.board[this.hooverCoords.y][this.hooverCoords.x - 1] === 'Dirt') {
-            this.dirtRemoved++
-          }
-          this.board[this.hooverCoords.y][this.hooverCoords.x] = ''
-          this.setHooverPosition(this.hooverCoords.x - 1, this.hooverCoords.y)
+          this.moveHoover(xAxis, yAxis)
         }
         break;
       }
@@ -114,21 +103,17 @@ class Game {
 
 }
 
-let game = new Game(5, 5);
-game.setHooverPosition(1, 2)
-
-const dirtCoords = [[1, 0], [2, 2], [2, 3]]
+let game = new Game(parseInt(boardDimensions[0]), parseInt(boardDimensions[1]));
+game.setHooverPosition(parseInt(startPosition[0]), parseInt(startPosition[1]))
 
 for (let i = 0; i < dirtCoords.length; i++) {
-  game.addDirtToBoard(dirtCoords[i][0], dirtCoords[i][1])
+  let coords = dirtCoords[i].split(" ")
+  game.addDirtToBoard(parseInt(coords[0]), parseInt(coords[1]))
 }
 
-console.log(game.board)
-
-const moves = 'NNESEESWNWW'.split('')
-
-for (let j = 0; j < moves.length; j++) {
-  game.makeMove(moves[j])
+// console.log(game.board)
+for (let j = 0; j < intructions.length; j++) {
+  game.makeMove(intructions[j])
 }
 
 console.log(game.hooverCoords.x, game.hooverCoords.y)
@@ -137,8 +122,8 @@ console.log(game.dirtRemoved)
 // console.log(game.moves)
 // console.log(game.board)
 
-
-
+// Need to check what happens if duplicate intructions 
+// Review the use of toString
 
 
 

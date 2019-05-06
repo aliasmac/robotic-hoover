@@ -3,7 +3,9 @@ A simple game to clean a room full of dirt with a handy robotic hoover!
 
 ## Functionality 
 - The game takes commands from input.txt and feeds it to script.js where the data is parsed to create a 2D game board 
-- The purpose of the game is i) add dirt to the 2D grid and then ii) direct the hoover to clean up the dirt  
+- The purpose of the game is to:
+    i) add dirt to the 2D grid and then
+    ii) direct the hoover to clean up the dirt  
 - The game has been designed according to OOP principles that uses class structure to organise the code 
 
 ## How to run program

@@ -11,9 +11,9 @@ A simple game to clean a room full of dirt with a handy robotic hoover!
 ## How to run program
 - Clone this repository and cd robotic-hoover/src 
 - run `node script.js`
-- The results of the game will be printed to the terminal in the following format:
-   * `1 3`
-   * `1`
+- The results of the game will be printed to the terminal in the following format:\
+`1 3`\
+`1`
 - Where the first line is the final position of the hoover
 - The second line is the number of dirt patches cleaned
 

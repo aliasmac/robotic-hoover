@@ -20,6 +20,7 @@ A simple game to clean a room full of dirt with a handy robotic hoover!
 `1`
 - Where the first line is the final position of the hoover
 - The second line is the number of dirt patches cleaned
+- The data in input.txt can be changed but please ensure it follows the format described above
 
 ### Reference:
 - https://gist.github.com/DavidJSimpsonEsq/71dcf396a2303ad5edd08690289d016d

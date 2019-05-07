@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-// Process args from input.txt
+// Parse data from input.txt
 const dataArray = fs.readFileSync('input.txt', 'utf8').split("\n");
 const boardDimensions = dataArray.slice(0, 1).toString().split(" ")
 const startPosition = dataArray.slice(1, 2).toString().split(" ") 
@@ -28,12 +28,12 @@ class Game {
     return board;
   }
 
-  setHooverPosition(xAxis, yAxis) {
+  setHooverPosition(xAxis, yAxis) { // Used to track and move hoover position
     this.hooverCoords = { // Navigation compass
       x: xAxis,
       y: yAxis
     }
-    this.board[yAxis][xAxis] = 'Hoover' // set coords on board to current Hoover position
+    this.board[yAxis][xAxis] = 'Hoover' // Set coords on board to current Hoover position
   }
 
   addDirtToBoard(dirtCoords) {
@@ -71,7 +71,7 @@ class Game {
     if(this.board[yAxis][xAxis] === 'Dirt') {
       this.dirtRemoved++
     }
-    this.board[this.hooverCoords.y][this.hooverCoords.x] = '' // ref prev coords 
+    this.board[this.hooverCoords.y][this.hooverCoords.x] = '' // Reference prev coords to clean board 
     this.setHooverPosition(xAxis, yAxis)
   }
 
@@ -125,15 +125,15 @@ class Game {
   }
 }
 
-// Create game instance and utilise instance methods to run data from input.txt
+// Create game instance and utilise instance methods to run parsed data from input.txt
 const game = new Game(parseInt(boardDimensions[0]), parseInt(boardDimensions[1]));
 game.setHooverPosition(parseInt(startPosition[0]), parseInt(startPosition[1]))
 game.addDirtToBoard(dirtCoords)
 game.playGame(intructions)
 
 // GAME RESULTS:
-console.log(game.hooverCoords.x, game.hooverCoords.y)
-console.log(game.dirtRemoved)
+console.log(game.hooverCoords.x, game.hooverCoords.y) // Final position of Hoover
+console.log(game.dirtRemoved) // Number of dirt patches cleaned
 
 
 

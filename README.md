@@ -6,7 +6,7 @@ A simple game to clean a room full of dirt with a handy robotic hoover!
    * The first line provides the room dimensions
    * The second line the starting position of the Hoover on the 2D game board
    * The preceeding lines up until the final line provide the dirt positions 
-   * The final line provides the driving instructions (as cardinal directions where e.g. N and E mean "go north" and "go east" respectively) in Caps.
+   * The final line provides the driving instructions (as cardinal directions where e.g. N and E mean "go north" and "go east" respectively) in caps.
 * The purpose of the game is to:
    * add dirt to the 2D grid
    * then direct the hoover to clean up the dirt  
